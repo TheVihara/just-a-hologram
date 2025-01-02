@@ -1,0 +1,15 @@
+location: {
+  world: "world",
+  x: 0,
+  y: 100,
+  z: 0,
+  yaw: 0,
+  pitch: 0
+}
+line_gap: 1.0
+lines:
+  - block: "GRASS_BLOCK"
+    update: true
+  - item: "DIAMOND_SWORD"
+  - text: "%player_name%"
+  - line: ""
