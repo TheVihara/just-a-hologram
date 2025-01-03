@@ -1,14 +1,14 @@
 package me.vihara.justahologram.api.hologram;
 
-import me.vihara.justahologram.api.hologram.line.HologramLine;
+import me.vihara.justahologram.api.hologram.line.IHologramLine;
 import me.vihara.justahologram.api.property.map.PropertyMap;
 
 import java.util.HashSet;
 
-public interface Hologram {
+public interface IHologram {
     String id();
     Position position();
-    HashSet<HologramLine> lines();
+    HashSet<IHologramLine> lines();
     PropertyMap properties();
 
     class Position {
