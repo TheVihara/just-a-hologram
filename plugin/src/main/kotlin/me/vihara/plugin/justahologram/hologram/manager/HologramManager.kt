@@ -1,5 +1,6 @@
 package me.vihara.plugin.justahologram.hologram.manager
 
+import me.vihara.core.config.ConfigColumn
 import me.vihara.core.config.yaml.YamlConfigFile
 import me.vihara.core.config.yaml.YamlConfigFolder
 import me.vihara.justahologram.api.factory.HologramFactory
@@ -20,29 +21,29 @@ data object HologramManager : HologramFactory {
             file as YamlConfigFile
 
             val config = file.config
-            val positionColumn = config.getConfigColumn("location")
-            val lineColumn = config.getConfigColumn("lines")
+            val positionColumn: ConfigColumn = config.get("location", ConfigColumn::class.java)
+            val lineColumn: ConfigColumn = config.get("lines", ConfigColumn::class.java)
             val lines = HashSet<IHologramLine>()
             val properties = PropertyMap()
 
-            properties.set<Float>(
-                SimpleProperty.of<Float>("line_gap", 1.0f),
-                config.get<Float>("line_gap", Float::class.java)
+            properties.set(
+                SimpleProperty.of("line_gap", 1.0f),
+                config.get("line_gap", Float::class.java)
             )
 
-            for (lineConfig in lineColumn.getKeys(false)) {
-
+            for (lineConfig in lineColumn.keyValueMap.keys) {
+                println(lineConfig)
             }
 
             addHologram(Hologram(
                 "test",
                 IHologram.Position(
-                    positionColumn.get<String>("world", String::class.java),
-                    positionColumn.get<Double>("x", Double::class.java),
-                    positionColumn.get<Double>("y", Double::class.java),
-                    positionColumn.get<Double>("z", Double::class.java),
-                    positionColumn.get<Float>("yaw", Float::class.java),
-                    positionColumn.get<Float>("pitch", Float::class.java)
+                    positionColumn.get("world", String::class.java),
+                    positionColumn.get("x", Double::class.java),
+                    positionColumn.get("y", Double::class.java),
+                    positionColumn.get("z", Double::class.java),
+                    positionColumn.get("yaw", Float::class.java),
+                    positionColumn.get("pitch", Float::class.java)
                 ),
                 lines,
                 properties

@@ -8,6 +8,9 @@ public class PropertyMap {
     private final ConcurrentHashMap<Property<?>, Object> properties = new ConcurrentHashMap<>();
 
     public <T> void set(Property<T> property, T value) {
+        if (value == null) {
+            return;
+        }
         properties.put(property, value);
     }
 
